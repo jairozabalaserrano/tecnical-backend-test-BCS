@@ -1,0 +1,33 @@
+### Health Check
+GET http://localhost:3000/health
+
+### Login (jwt)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password123"
+}
+
+### Obtener todos los productos
+GET http://localhost:3000/products
+
+### Obtener un producto por id
+GET http://localhost:3000/products/1
+
+### Crear Onboarding
+POST http://localhost:3000/onboarding
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.access_token}}
+
+{
+  "nombre": "Usuario Prueba",
+  "documento": "123456789",
+  "email": "usuario@test.com",
+  "montoInicial": 5000
+}
+
+### Obtener Onboarding
+GET http://localhost:3000/onboarding
+Authorization: Bearer {{login.response.body.access_token}}
