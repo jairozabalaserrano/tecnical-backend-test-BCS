@@ -1,98 +1,178 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🏦 Backend - API NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST construida con **NestJS 11** para el sistema bancario digital. Incluye autenticación JWT, encriptación de datos, métricas con Prometheus y documentación Swagger.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Características
 
-## Description
+- 🔐 **Autenticación JWT** con Passport.js
+- 🛡️ **Encriptación** de datos sensibles (AES-256)
+- 📊 **Métricas** con Prometheus
+- 📝 **Documentación** automática con Swagger
+- 🗄️ **Base de datos** PostgreSQL con TypeORM
+- ✅ **Validación** con class-validator
+- 🧪 **Testing** con Jest
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📁 Estructura del Proyecto
 
-## Project setup
-
-```bash
-$ npm install
+```
+backend/
+├── src/
+│   ├── auth/           # Autenticación y autorización
+│   │   ├── dto/        # Data Transfer Objects
+│   │   ├── guards/     # Guards de autenticación
+│   │   └── strategies/ # Estrategias Passport
+│   ├── common/         # Utilidades compartidas
+│   ├── encryption/     # Servicios de encriptación
+│   ├── health/         # Health checks
+│   ├── onboarding/     # Módulo de onboarding
+│   │   ├── dto/
+│   │   └── entities/
+│   ├── products/       # Módulo de productos
+│   │   ├── dto/
+│   │   └── entities/
+│   ├── app.module.ts   # Módulo principal
+│   └── main.ts         # Punto de entrada
+├── test/               # Tests E2E
+├── package.json
+└── tsconfig.json
 ```
 
-## Compile and run the project
+## 🚀 Instalación
+
+> **Nota**: Este proyecto es parte de un monorepo. Se recomienda instalar las dependencias desde la raíz del proyecto.
+
+### Desde la raíz del monorepo (Recomendado)
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# En la raíz del proyecto
+npm install
 ```
 
-## Run tests
+### Instalación independiente
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd backend
+npm install
 ```
 
-## Deployment
+## ▶️ Ejecución
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Prerrequisitos
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+⚠️ **Docker debe estar corriendo** con PostgreSQL antes de iniciar el backend:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Desde la raíz del proyecto
+docker compose up -d db
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Iniciar en modo desarrollo
 
-## Resources
+```bash
+# Desde la raíz del monorepo
+npm run start:backend
 
-Check out a few resources that may come in handy when working with NestJS:
+# O desde el directorio backend
+npm run start:dev
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+El servidor estará disponible en:
+- **API**: `http://localhost:3010`
+- **Swagger**: `http://localhost:3010/api`
 
-## Support
+### Otros comandos
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Modo producción
+npm run start:prod
 
-## Stay in touch
+# Build
+npm run build
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Modo debug
+npm run start:debug
+```
 
-## License
+## 🧪 Testing
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+# Tests unitarios
+npm run test
+
+# Tests en modo watch
+npm run test:watch
+
+# Tests E2E
+npm run test:e2e
+```
+
+## 📝 API Endpoints
+
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| GET | `/health` | Estado del servidor | No |
+| POST | `/auth/login` | Autenticación | No |
+| GET | `/products` | Lista de productos | No |
+| GET | `/products/:id` | Detalle de producto | No |
+| POST | `/onboarding` | Crear solicitud | Sí (JWT) |
+
+## 🔐 Credenciales de Prueba
+
+```
+Usuario: admin
+Contraseña: password123
+```
+
+## ⚙️ Variables de Entorno
+
+El backend utiliza las siguientes variables de entorno (definidas en `.env` en la raíz):
+
+```env
+# Puerto del servidor
+NEXT_PUBLIC_API_URL_BACK=3010
+
+# JWT
+JWT_SECRET=<clave-secreta>
+JWT_EXPIRES_IN=3600s
+
+# Base de Datos
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=admin
+DB_PASSWORD=adminpassword
+DB_NAME=bank_db
+
+# Encriptación
+ENCRYPTION_KEY=<clave-32-bytes>
+ENCRYPTION_IV=<iv-16-bytes>
+```
+
+## 📦 Dependencias Principales
+
+- **@nestjs/core** - Framework principal
+- **@nestjs/jwt** - Autenticación JWT
+- **@nestjs/passport** - Integración Passport
+- **@nestjs/typeorm** - ORM para PostgreSQL
+- **@nestjs/swagger** - Documentación API
+- **@willsoto/nestjs-prometheus** - Métricas
+- **class-validator** - Validación de datos
+
+## 📜 Scripts Disponibles
+
+```bash
+npm run build          # Compila TypeScript
+npm run start          # Inicia el servidor
+npm run start:dev      # Modo desarrollo (watch)
+npm run start:debug    # Modo debug
+npm run start:prod     # Modo producción
+npm run format         # Formatea código con Prettier
+npm run lint           # Revisa código con ESLint
+npm run test           # Ejecuta tests
+npm run test:watch     # Tests en modo watch
+npm run test:cov       # Tests con coverage
+npm run test:e2e       # Tests E2E
+```
+
+## ✍️ Autor
+
+Jairo Andres Zabala Serrano
