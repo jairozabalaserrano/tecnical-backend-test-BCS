@@ -280,10 +280,6 @@ Accede a Grafana en `http://localhost:3012` (admin/admin) para crear dashboards.
 - Validación de entrada con class-validator
 - Headers de seguridad configurados
 
-## 📄 Licencia
-
-ISC
-
 ## ✍️ Autor
 
 Jairo Andres Zabala Serrano
