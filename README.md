@@ -139,7 +139,7 @@ ENCRYPTION_IV=a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
 | Swagger API | http://localhost:3010/api | - | - |
 | Frontend | http://localhost:3011 | - | - |
 | PostgreSQL | localhost:5432 | admin | adminpassword |
-| Prometheus | http://localhost:9090 | - | - |
+| Prometheus | http://prometheus:9090| - | - |
 | Grafana | http://localhost:3012 | admin | admin |
 | Blackbox | localhost:9115 | - | - |
 
