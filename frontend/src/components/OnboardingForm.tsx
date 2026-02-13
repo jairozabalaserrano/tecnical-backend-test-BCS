@@ -1,16 +1,3 @@
-/**
- * OnboardingForm.tsx - FORMULARIO DE ONBOARDING
- * 
- * Permite crear una solicitud de onboarding.
- * Requiere token JWT para funcionar (ruta protegida en backend).
- * 
- * Demuestra:
- * - Formularios controlados en React
- * - Validación en el cliente (adicional a la del backend)
- * - Envío de token JWT en headers
- * - Manejo de respuestas exitosas y errores
- */
-
 'use client';
 
 import { useState, FormEvent } from 'react';
@@ -61,10 +48,16 @@ export default function OnboardingForm({ token }: Props) {
       setFormData({ nombre: '', documento: '', email: '', montoInicial: '' });
     } catch (err) {
       const apiError = err as ApiError;
-      // El backend puede devolver un array de errores de validación
-      const message = Array.isArray(apiError.message)
-        ? apiError.message.join(', ')
-        : apiError.message || 'Error al crear onboarding';
+      let message = 'Error al crear onboarding';
+      
+      if (typeof apiError.message === 'string') {
+        message = apiError.message;
+      } else if (Array.isArray(apiError.message)) {
+        message = apiError.message.join(', ');
+      } else if (apiError.error) {
+        message = apiError.error;
+      }
+      
       setError(message);
     } finally {
       setLoading(false);
@@ -91,7 +84,7 @@ export default function OnboardingForm({ token }: Props) {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Documento de identidad
+          Id
         </label>
         <input
           type="text"

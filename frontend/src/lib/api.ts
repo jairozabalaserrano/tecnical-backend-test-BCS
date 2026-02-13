@@ -1,15 +1,3 @@
-/**
- * lib/api.ts - CLIENTE API
- * 
- * Centraliza todas las llamadas al backend.
- * 
- * Ventajas de tener un cliente API:
- * - Un solo lugar para configurar la URL base
- * - Manejo consistente de errores
- * - Fácil de mockear para tests
- * - Headers comunes en un solo lugar
- */
-
 import { decrypt } from './encryption';
 import {
   LoginResponse,
@@ -19,12 +7,14 @@ import {
   HealthResponse,
 } from '@/types/api';
 
-// URL del backend - usa la variable de entorno o el fallback
+declare global {
+  interface Window {
+    handleSessionExpired?: () => void;
+  }
+}
+
 const API_URL = `http://localhost:${process.env.NEXT_PUBLIC_API_URL_BACK}`;
 
-/**
- * Función helper para hacer fetch con manejo de errores
- */
 async function fetchApi<T>(
   endpoint: string,
   options?: RequestInit
@@ -37,23 +27,24 @@ async function fetchApi<T>(
     },
   });
 
+  if (response.status === 401) {
+    if (window.handleSessionExpired) {
+      window.handleSessionExpired();
+    }
+    throw { message: 'Sesión expirada', statusCode: 401 };
+  }
+
   const data = await response.json();
 
   if (!response.ok) {
-    // Lanza el error para que el componente lo maneje
     throw data;
   }
   
-  // Si la respuesta está encriptada, la desencripta
   if (data && data.encryptedData) {
-    console.log('Encrypted data received:', data.encryptedData);
     const decryptedData = decrypt(data.encryptedData);
-    console.log('Decrypted data:', decryptedData);
     return decryptedData;
   }
 
-  // Si la respuesta viene envuelta por el TransformInterceptor del backend
-  // (tiene formato { success: true, data: ..., timestamp: ... })
   if (data && typeof data === 'object' && 'data' in data && 'success' in data) {
     return data.data;
   }

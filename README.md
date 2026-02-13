@@ -98,7 +98,7 @@ Esto levanta todos los servicios:
 - **PostgreSQL**: `localhost:5432`
 - **Backend**: `http://localhost:3010`
 - **Frontend**: `http://localhost:3011`
-- **Prometheus**: `http://localhost:9090`
+- **Prometheus**: `http://prometheus:9090`
 - **Grafana**: `http://localhost:3012`
 - **Blackbox Exporter**: `localhost:9115`
 

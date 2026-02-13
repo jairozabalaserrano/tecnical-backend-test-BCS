@@ -1,10 +1,3 @@
-/**
- * LoginForm.tsx - FORMULARIO DE LOGIN
- * 
- * Permite al usuario autenticarse y obtener un token JWT.
- * El token se pasa al componente padre via callback (onLogin).
- */
-
 'use client';
 
 import { useState, FormEvent } from 'react';

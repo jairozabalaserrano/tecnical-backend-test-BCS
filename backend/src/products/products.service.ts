@@ -14,7 +14,7 @@ export class ProductsService {
   }
 
   async findOne(id: number): Promise<Product> {
-    const product = await this.productRepository.findOne(id);
+    const product = await this.productRepository.findById(id);
     if (!product) {
       throw new Error(`Product with id ${id} not found`);
     }

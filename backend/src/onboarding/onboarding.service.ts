@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Onboarding } from './entities/onboarding.entity';
@@ -17,8 +17,8 @@ export class OnboardingService {
     });
 
     if (existingOnboarding) {
-      throw new Error(
-        'Onboarding with the same documento or email already exists',
+      throw new ConflictException(
+        'User with the same documento or email already exists',
       );
     }
 
